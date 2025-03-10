@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certification Logos</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .cert-logo {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 150px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .cert-logo h2 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+            text-align: center;
+        }
+        .cert-karate {
+            color: #d9534f;
+        }
+        .cert-yoga {
+            color: #6AB187;
+        }
+        .cert-dance {
+            color: #E78F8E;
+        }
+        .cert-general {
+            color: #f0ad4e;
+        }
+        .logo-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        .cert-karate .logo-circle {
+            background-color: #d9534f;
+            color: white;
+        }
+        .cert-yoga .logo-circle {
+            background-color: #6AB187;
+            color: white;
+        }
+        .cert-dance .logo-circle {
+            background-color: #E78F8E;
+            color: white;
+        }
+        .cert-general .logo-circle {
+            background-color: #f0ad4e;
+            color: white;
+        }
+        .instructions {
+            margin-top: 30px;
+            text-align: center;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="cert-logo cert-karate">
+            <div class="logo-circle">IKF</div>
+            <h2>International Karate Federation</h2>
+        </div>
+        
+        <div class="cert-logo cert-general">
+            <div class="logo-circle">NMA</div>
+            <h2>National Martial Arts Association</h2>
+        </div>
+        
+        <div class="cert-logo cert-yoga">
+            <div class="logo-circle">YAA</div>
+            <h2>Yoga Alliance Association</h2>
+        </div>
+        
+        <div class="cert-logo cert-dance">
+            <div class="logo-circle">DCA</div>
+            <h2>Dance Certification Alliance</h2>
+        </div>
+    </div>
+    
+    <div class="instructions">
+        <p>Take screenshot of each logo individually and save as:</p>
+        <p>cert1.png, cert2.png, cert3.png, and cert4.png</p>
+        <p>Recommended size: 150x150 pixels each</p>
+    </div>
+</body>
+</html> 

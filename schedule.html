@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knockouts Karate - Schedule</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .schedule-container {
+            padding: 80px 5%;
+        }
+        
+        .schedule-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .schedule-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .schedule-header h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        .schedule-header p {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .schedule-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .schedule-tab {
+            padding: 12px 25px;
+            background-color: #f5f5f5;
+            border-radius: 30px;
+            margin: 0 10px 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .schedule-tab.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .schedule-tab:hover:not(.active) {
+            background-color: #e5e5e5;
+        }
+        
+        .schedule-content {
+            display: none;
+        }
+        
+        .schedule-content.active {
+            display: block;
+        }
+        
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 40px;
+            box-shadow: var(--box-shadow);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .schedule-table th, .schedule-table td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+        
+        .schedule-table th {
+            background-color: var(--secondary-color);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .schedule-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .schedule-table tr:hover {
+            background-color: #e9ecef;
+        }
+        
+        .class-type {
+            font-weight: 700;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .class-time {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .karate-class {
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .yoga-class {
+            border-left: 4px solid #6AB187;
+        }
+        
+        .dance-class {
+            border-left: 4px solid #E78F8E;
+        }
+        
+        .class-info {
+            margin-top: 60px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .class-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .class-card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .class-card.yoga i {
+            color: #6AB187;
+        }
+        
+        .class-card.dance i {
+            color: #E78F8E;
+        }
+        
+        .class-card h3 {
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .class-card p {
+            margin-bottom: 20px;
+        }
+        
+        .class-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+        }
+        
+        .class-badge.yoga {
+            background-color: #6AB187;
+        }
+        
+        .class-badge.dance {
+            background-color: #E78F8E;
+        }
+        
+        @media (max-width: 768px) {
+            .class-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .schedule-table {
+                font-size: 0.9rem;
+            }
+            
+            .schedule-table th, .schedule-table td {
+                padding: 10px 5px;
+            }
+            
+            .schedule-tabs {
+                flex-direction: row;
+            }
+            
+            .schedule-tab {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="images/original.png" alt="Knockouts Karate Logo" id="logo">
+            </a>
+            <h1>Knockouts Karate</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="schedule.html" class="active">Schedule</a></li>
+                <li><a href="instructors.html">Instructors</a></li>
+                <!-- <li><a href="fees.html">Membership & Fees</a></li> -->
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-nav-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <section class="schedule-container">
+        <div class="schedule-header">
+            <h2>Class Schedule</h2>
+            <p>Our center offers a variety of classes including traditional karate, rejuvenating yoga, and energetic dance. Check out our weekly schedule below to find the perfect class for you or your family members.</p>
+        </div>
+        
+        <div class="schedule-tabs">
+            <div class="schedule-tab active" data-tab="all">All Classes</div>
+            <div class="schedule-tab" data-tab="karate">Karate</div>
+            <div class="schedule-tab" data-tab="yoga">Yoga</div>
+            <div class="schedule-tab" data-tab="dance">Dance</div>
+        </div>
+        
+        <div id="all-classes" class="schedule-content active">
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Monday</th>
+                        <th>Tuesday</th>
+                        <th>Wednesday</th>
+                        <th>Thursday</th>
+                        <th>Friday</th>
+                        <th>Saturday</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>08:00 - 09:00</td>
+                        <td class="yoga-class">
+                            <span class="class-type">Morning Yoga</span>
+                            <span class="class-time">All Levels</span>
+                        </td>
+                        <td></td>
+                        <td class="yoga-class">
+                            <span class="class-type">Morning Yoga</span>
+                            <span class="class-time">All Levels</span>
+                        </td>
+                        <td></td>
+                        <td class="yoga-class">
+                            <span class="class-type">Morning Yoga</span>
+                            <span class="class-time">All Levels</span>
+                        </td>
+                        <td class="yoga-class">
+                            <span class="class-type">Vinyasa Flow</span>
+                            <span class="class-time">Intermediate</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>09:00 - 10:00</td>
+                        <td></td>
+                        <td class="dance-class">
+                            <span class="class-type">Zumba</span>
+                            <span class="class-time">All Levels</span>
+                        </td>
+                        <td></td>
+                        <td class="dance-class">
+                            <span class="class-type">Hip-Hop</span>
+                            <span class="class-time">Beginner</span>
+                        </td>
+                        <td></td>
+                        <td class="karate-class">
+                            <span class="class-type">Little Dragons</span>
+                            <span class="class-time">Ages 4-6</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>10:15 - 11:15</td>
+                        <td class="yoga-class">
+                            <span class="class-type">Gentle Yoga</span>
+                            <span class="class-time">Seniors</span>
+                        </td>
+                        <td></td>
+                        <td class="yoga-class">
+                            <span class="class-type">Gentle Yoga</span>
+                            <span class="class-time">Seniors</span>
+                        </td>
+                        <td></td>
+                        <td class="yoga-class">
+                            <span class="class-type">Gentle Yoga</span>
+                            <span class="class-time">Seniors</span>
+                        </td>
+                        <td class="karate-class">
+                            <span class="class-type">Kids Karate</span>
+                            <span class="class-time">Ages 7-12</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>11:30 - 12:30</td>
+                        <td></td>
+                        <td class="dance-class">
+                            <span class="class-type">Ballet Basics</span>
+                            <span class="class-time">Ages 5-8</span>
+                        </td>
+                        <td></td>
+                        <td class="dance-class">
+                            <span class="class-type">Ballet Basics</span>
+                            <span class="class-time">Ages 5-8</span>
+                        </td>
+                        <td></td>
+                        <td class="karate-class">
+                            <span class="class-type">Family Class</span>
+                            <span class="class-time">All Ages</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>16:00 - 17:00</td>
+                        <td class="karate-class">
+                            <span class="class-type">Little Dragons</span>
+                            <span class="class-time">Ages 4-6</span>
+                        </td>
+                        <td class="karate-class">
+                            <span class="class-type">Little Dragons</span>
+                            <span class="class-time">Ages 4-6</span>
+                        </td>
+                        <td class="karate-class">
+                            <span class="class-type">Little Dragons</span>
+                            <span class="class-time">Ages 4-6</span>
+                        </td>
+                        <td class="karate-class">
+                            <span class="class-type">Little Dragons</span>
+                            <span class="class-time">Ages 4-6</span>
+                        </td>
+                        <td class="karate-class">
+                            <span class="class-type">Little Dragons</span>
+                            <span class="class-time">Ages 4-6</span>
+                        </td>
+                        <td class="dance-class">
+                            <span class="class-type">Kids Dance</span>
+                            <span class="class-time">Ages 7-12</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>17:15 - 18:15</td>
+                        <td class="karate-class">
+                            <span class="class-type">Kids Karate</span>
+                            <span class="class-time">Ages 7-12</span>
+                        </td>
+                        <td class="karate-class">
+                            <span class="class-type">Kids Karate</span>
+                            <span class="class-time">Ages 7-12</span>
+                        </td>
+                        <td class="karate-class">
+                            <span class="class-type">Kids Karate</span>
+                            <span class="class-time">Ages 7-12</span>
+                        </td>
+                        <td class="karate-class">
+                            <span class="class-type">Kids Karate</span>
+                            <span class="class-time">Ages 7-12</span>
+                        </td>
+                        <td class="karate-class">
+                            <span class="class-type">Kids Karate</span>
+                            <span class="class-time">Ages 7-12</span>
+                        </td>
+                        <td class="dance-class">
+                            <span class="class-type">Teen Dance</span>
+                            <span class="class-time">Ages 13-17</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>18:30 - 19:30</td>
+                        <td class="karate-class">
+                            <span class="class-type">Teen Karate</span>
+                            <span class="class-time">Ages 13-17</span>
+                        </td>
+                        <td class="karate-class">
+                            <span class="class-type">Adult Beginners</span>
+                            <span class="class-time">Ages 18+</span>
+                        </td>
+                        <td class="karate-class">
+                            <span class="class-type">Teen Karate</span>
+                            <span class="class-time">Ages 13-17</span>
+                        </td>
+                        <td class="karate-class">
+                            <span class="class-type">Adult Beginners</span>
+                            <span class="class-time">Ages 18+</span>
+                        </td>
+                        <td class="karate-class">
+                            <span class="class-type">Family Class</span>
+                            <span class="class-time">All Ages</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>19:45 - 21:00</td>
+                        <td class="karate-class">
+                            <span class="class-type">Adult Advanced</span>
+                            <span class="class-time">Green Belt+</span>
+                        </td>
+                        <td class="yoga-class">
+                            <span class="class-type">Power Yoga</span>
+                            <span class="class-time">Intermediate</span>
+                        </td>
+                        <td class="karate-class">
+                            <span class="class-type">Adult Advanced</span>
+                            <span class="class-time">Green Belt+</span>
+                        </td>
+                        <td class="dance-class">
+                            <span class="class-type">Adult Dance</span>
+                            <span class="class-time">All Levels</span>
+                        </td>
+                        <td class="yoga-class">
+                            <span class="class-type">Restorative Yoga</span>
+                            <span class="class-time">All Levels</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div id="karate-classes" class="schedule-content">
+            <table class="schedule-table">
+                <!-- Karate-specific schedule would be similar but only show karate classes -->
+                <!-- For brevity, this content is not fully duplicated here but would be populated in a real implementation -->
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Monday</th>
+                        <th>Tuesday</th>
+                        <th>Wednesday</th>
+                        <th>Thursday</th>
+                        <th>Friday</th>
+                        <th>Saturday</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Only karate classes shown here -->
+                </tbody>
+            </table>
+        </div>
+        
+        <div id="yoga-classes" class="schedule-content">
+            <table class="schedule-table">
+                <!-- Yoga-specific schedule -->
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Monday</th>
+                        <th>Tuesday</th>
+                        <th>Wednesday</th>
+                        <th>Thursday</th>
+                        <th>Friday</th>
+                        <th>Saturday</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Only yoga classes shown here -->
+                </tbody>
+            </table>
+        </div>
+        
+        <div id="dance-classes" class="schedule-content">
+            <table class="schedule-table">
+                <!-- Dance-specific schedule -->
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Monday</th>
+                        <th>Tuesday</th>
+                        <th>Wednesday</th>
+                        <th>Thursday</th>
+                        <th>Friday</th>
+                        <th>Saturday</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Only dance classes shown here -->
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="class-info">
+            <div class="class-card">
+                <i class="fas fa-fist-raised"></i>
+                <h3>Karate Programs</h3>
+                <p>Our traditional karate programs focus on technique, discipline, and self-defense. Classes are available for all ages and skill levels, from Little Dragons to advanced adult practitioners.</p>
+                <span class="class-badge">45-75 Minutes</span>
+            </div>
+            
+            <div class="class-card yoga">
+                <i class="fas fa-pray"></i>
+                <h3>Yoga Classes</h3>
+                <p>Find balance, flexibility, and inner peace through our variety of yoga classes. From gentle sessions for seniors to challenging vinyasa flows, we have a practice for everyone.</p>
+                <span class="class-badge yoga">60 Minutes</span>
+            </div>
+            
+            <div class="class-card dance">
+                <i class="fas fa-music"></i>
+                <h3>Dance Programs</h3>
+                <p>Express yourself through movement in our dynamic dance classes. We offer styles including ballet, hip-hop, and Zumba for children, teens, and adults of all experience levels.</p>
+                <span class="class-badge dance">60 Minutes</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>Ready to Join a Class?</h2>
+        <p>Contact us to schedule your free introductory lesson or to get more information about our programs.</p>
+        <a href="contact.html" class="btn btn-large">Contact Us Today</a>
+        <div class="whatsapp-contact">
+            <i class="fab fa-whatsapp"></i>
+            <p>Or reach us directly on WhatsApp: <a href="https://wa.me/1234567890" target="_blank">Chat Now</a></p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="images/logo.png" alt="Martial Arts & Wellness Center Logo" class="footer-logo-img">
+                <h3>Martial Arts & Wellness Center</h3>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Martial Arts Ave, City</p>
+                <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+                <p><i class="fas fa-envelope"></i> info@mawcenter.com</p>
+            </div>
+            <div class="footer-hours">
+                <h4>Hours</h4>
+                <p>Monday - Friday: 8:00 AM - 9:00 PM</p>
+                <p>Saturday: 8:00 AM - 5:00 PM</p>
+                <p>Sunday: Closed</p>
+            </div>
+            <div class="footer-social">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Martial Arts & Wellness Center. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Tab functionality for schedule
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.schedule-tab');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    tab.classList.add('active');
+                    
+                    // Hide all content
+                    document.querySelectorAll('.schedule-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    // Show relevant content
+                    const tabType = tab.getAttribute('data-tab');
+                    if (tabType === 'all') {
+                        document.getElementById('all-classes').classList.add('active');
+                    } else if (tabType === 'karate') {
+                        document.getElementById('karate-classes').classList.add('active');
+                    } else if (tabType === 'yoga') {
+                        document.getElementById('yoga-classes').classList.add('active');
+                    } else if (tabType === 'dance') {
+                        document.getElementById('dance-classes').classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

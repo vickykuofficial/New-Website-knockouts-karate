@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Instructors - Karate Dojo</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .instructors-container {
+            padding: 80px 5%;
+        }
+        
+        .instructors-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .instructors-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .instructors-header h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        .instructors-header p {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .instructors-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .instructor-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+        
+        .instructor-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .instructor-image {
+            height: 300px;
+            overflow: hidden;
+        }
+        
+        .instructor-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .instructor-card:hover .instructor-image img {
+            transform: scale(1.05);
+        }
+        
+        .instructor-info {
+            padding: 25px;
+        }
+        
+        .instructor-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--secondary-color);
+        }
+        
+        .instructor-rank {
+            font-size: 1rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+            display: block;
+        }
+        
+        .instructor-bio {
+            margin-bottom: 20px;
+        }
+        
+        .instructor-achievements {
+            margin-top: 15px;
+        }
+        
+        .achievement-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .achievements-list {
+            list-style: none;
+        }
+        
+        .achievements-list li {
+            margin-bottom: 5px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .achievements-list li:before {
+            content: '\f559';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+        
+        .training-philosophy {
+            background-color: var(--light-color);
+            padding: 60px 5%;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .training-philosophy h3 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .training-philosophy h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .philosophy-item {
+            background-color: white;
+            padding: 30px 20px;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .philosophy-item i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .philosophy-item h4 {
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .certifications {
+            margin-bottom: 60px;
+        }
+        
+        .certifications h3 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+        
+        .certifications h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        .certification-logos {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .certification-logo {
+            max-width: 150px;
+            height: auto;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+        
+        .certification-logo:hover {
+            opacity: 1;
+        }
+        
+        @media (max-width: 1024px) {
+            .instructors-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .philosophy-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .instructors-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .instructor-image {
+                height: 250px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .philosophy-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="images/original.png" alt="Knockouts Karate Logo" id="logo">
+            </a>
+            <h1>Knockouts Karate</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="schedule.html">Schedule</a></li>
+                <li><a href="instructors.html">Instructors</a></li>
+                <!-- <li><a href="fees.html">Membership & Fees</a></li> -->
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-nav-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <section class="instructors-container">
+        <div class="instructors-header">
+            <h2>Our Instructors</h2>
+            <p>Our instructors are highly qualified and passionate about teaching traditional karate. With years of experience and dedication to the martial arts, they bring knowledge, expertise, and personalized attention to every class.</p>
+        </div>
+        
+        <div class="instructors-grid">
+            <div class="instructor-card">
+                <div class="instructor-image">
+                    <img src="images/sensei1.jpg" alt="Sensei John Davis">
+                </div>
+                <div class="instructor-info">
+                    <h3 class="instructor-name">Sensei John Davis</h3>
+                    <span class="instructor-rank">5th Degree Black Belt, Chief Instructor</span>
+                    <p class="instructor-bio">Sensei John has been practicing karate for over 25 years and teaching for 15. A former national champion, he is dedicated to preserving traditional karate while making it accessible to students of all ages and abilities.</p>
+                    <div class="instructor-achievements">
+                        <span class="achievement-title">Achievements & Certifications:</span>
+                        <ul class="achievements-list">
+                            <li>National Kumite Champion (2005-2007)</li>
+                            <li>Certified International Instructor</li>
+                            <li>Trained in Japan with Master Nakamura</li>
+                            <li>Children's Instructor Certification</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="instructor-card">
+                <div class="instructor-image">
+                    <img src="images/sensei2.jpg" alt="Sensei Sarah Chen">
+                </div>
+                <div class="instructor-info">
+                    <h3 class="instructor-name">Sensei Sarah Chen</h3>
+                    <span class="instructor-rank">4th Degree Black Belt, Program Director</span>
+                    <p class="instructor-bio">Sensei Sarah specializes in teaching children and developing youth programs. Her background in education combines with her martial arts expertise to create engaging, effective classes that build both skills and character.</p>
+                    <div class="instructor-achievements">
+                        <span class="achievement-title">Achievements & Certifications:</span>
+                        <ul class="achievements-list">
+                            <li>Regional Kata Champion (2009-2012)</li>
+                            <li>Youth Development Specialist</li>
+                            <li>First Aid & CPR Certified</li>
+                            <li>M.Ed. in Physical Education</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="instructor-card">
+                <div class="instructor-image">
+                    <img src="images/sensei3.jpg" alt="Sensei Michael Rodriguez">
+                </div>
+                <div class="instructor-info">
+                    <h3 class="instructor-name">Sensei Michael Rodriguez</h3>
+                    <span class="instructor-rank">3rd Degree Black Belt, Adult Program Lead</span>
+                    <p class="instructor-bio">Sensei Michael brings his background in athletic training to his karate instruction. He excels at helping adult students develop strength, flexibility, and proper body mechanics while learning traditional techniques.</p>
+                    <div class="instructor-achievements">
+                        <span class="achievement-title">Achievements & Certifications:</span>
+                        <ul class="achievements-list">
+                            <li>Certified Strength & Conditioning Specialist</li>
+                            <li>International Referee Certification</li>
+                            <li>Adult Fitness Programming Expert</li>
+                            <li>Self-Defense Instructor</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="training-philosophy">
+            <h3>Our Training Philosophy</h3>
+            <p>At our dojo, we believe in developing the whole person through martial arts training. Our approach combines traditional karate techniques with modern teaching methods to create a comprehensive experience that benefits mind, body, and spirit.</p>
+            
+            <div class="philosophy-grid">
+                <div class="philosophy-item">
+                    <i class="fas fa-brain"></i>
+                    <h4>Mental Focus</h4>
+                    <p>We teach concentration, awareness, and mental discipline that extends beyond the dojo.</p>
+                </div>
+                
+                <div class="philosophy-item">
+                    <i class="fas fa-heartbeat"></i>
+                    <h4>Physical Fitness</h4>
+                    <p>Our training develops strength, flexibility, coordination, and overall physical health.</p>
+                </div>
+                
+                <div class="philosophy-item">
+                    <i class="fas fa-hands"></i>
+                    <h4>Technical Excellence</h4>
+                    <p>We emphasize correct form and effective application of traditional techniques.</p>
+                </div>
+                
+                <div class="philosophy-item">
+                    <i class="fas fa-balance-scale"></i>
+                    <h4>Character Development</h4>
+                    <p>Respect, discipline, perseverance, and confidence are core values we instill in all students.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="certifications">
+            <h3>Affiliations & Certifications</h3>
+            <p>Our dojo and instructors maintain affiliations with respected karate organizations and hold certifications that ensure quality instruction and authentic traditional training.</p>
+            
+            <div class="certification-logos">
+                <img src="images/cert1.png" alt="International Karate Federation" class="certification-logo">
+                <img src="images/cert2.png" alt="National Martial Arts Association" class="certification-logo">
+                <img src="images/cert3.png" alt="Traditional Karate Alliance" class="certification-logo">
+                <img src="images/cert4.png" alt="Youth Martial Arts Council" class="certification-logo">
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>Train With Our Expert Instructors</h2>
+        <p>Experience the difference that quality instruction can make in your martial arts journey. Contact us to learn more about our instructors and programs.</p>
+        <a href="contact.html" class="btn btn-large">Contact Us Today</a>
+        <div class="whatsapp-contact">
+            <i class="fab fa-whatsapp"></i>
+            <p>Or reach us directly on WhatsApp: <a href="https://wa.me/1234567890" target="_blank">Chat Now</a></p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="images/logo.png" alt="Karate Dojo Logo" class="footer-logo-img">
+                <h3>Karate Dojo</h3>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Martial Arts Ave, City</p>
+                <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+                <p><i class="fas fa-envelope"></i> info@karatedojo.com</p>
+            </div>
+            <div class="footer-hours">
+                <h4>Training Hours</h4>
+                <p>Monday - Friday: 4:00 PM - 9:00 PM</p>
+                <p>Saturday: 9:00 AM - 1:00 PM</p>
+                <p>Sunday: Closed</p>
+            </div>
+            <div class="footer-social">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Karate Dojo. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

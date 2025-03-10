@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membership & Fees - Karate Dojo</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .fees-container {
+            padding: 80px 5%;
+        }
+        
+        .fees-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .fees-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .fees-header h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        .fees-header p {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .pricing-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pricing-card.featured {
+            border: 3px solid var(--primary-color);
+            transform: scale(1.02);
+        }
+        
+        .featured-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-bottom-left-radius: 10px;
+        }
+        
+        .pricing-header {
+            padding: 30px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .pricing-card.featured .pricing-header {
+            background-color: var(--primary-color);
+        }
+        
+        .pricing-title {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+        
+        .pricing-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .pricing-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+        
+        .pricing-period {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .pricing-features {
+            padding: 30px;
+            list-style: none;
+        }
+        
+        .pricing-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .pricing-features i {
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+        
+        .pricing-features .not-included {
+            opacity: 0.5;
+            text-decoration: line-through;
+        }
+        
+        .pricing-features .not-included i {
+            color: #ccc;
+        }
+        
+        .pricing-action {
+            padding: 20px 30px 30px;
+        }
+        
+        .additional-info {
+            background-color: var(--light-color);
+            padding: 60px 5%;
+            margin-bottom: 60px;
+        }
+        
+        .additional-info h3 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .additional-info h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .info-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .info-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+        }
+        
+        .info-card h4 i {
+            color: var(--primary-color);
+            margin-right: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .info-card ul {
+            list-style: none;
+            margin-top: 15px;
+        }
+        
+        .info-card ul li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .info-card ul li:before {
+            content: '\f054';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-size: 0.8rem;
+        }
+        
+        .faq {
+            margin-bottom: 60px;
+        }
+        
+        .faq h3 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .faq h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        .faq-item {
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 20px;
+            background-color: white;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+        
+        .faq-question i {
+            transition: var(--transition);
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: var(--transition);
+            background-color: #f9f9f9;
+        }
+        
+        .faq-item.active .faq-question {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 1000px;
+        }
+        
+        @media (max-width: 1024px) {
+            .pricing-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .pricing-card.featured {
+                grid-column: span 2;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .pricing-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-card.featured {
+                grid-column: auto;
+                transform: scale(1);
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="images/logo.png" alt="Karate Dojo Logo" id="logo">
+            <h1>Karate Dojo</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="schedule.html">Schedule</a></li>
+                <li><a href="instructors.html">Instructors</a></li>
+                <li><a href="fees.html" class="active">Membership & Fees</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-nav-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <section class="fees-container">
+        <div class="fees-header">
+            <h2>Membership & Fees</h2>
+            <p>We offer flexible membership options to fit different needs and budgets. Choose the plan that works best for you and your family, with no long-term contracts required.</p>
+        </div>
+        
+        <div class="pricing-cards">
+            <div class="pricing-card">
+                <div class="pricing-header">
+                    <h3 class="pricing-title">Basic</h3>
+                    <p class="pricing-subtitle">Perfect for beginners</p>
+                    <div class="pricing-price">$79<span class="pricing-period">/month</span></div>
+                </div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> 2 classes per week</li>
+                    <li><i class="fas fa-check"></i> Access to beginner classes</li>
+                    <li><i class="fas fa-check"></i> Uniform included</li>
+                    <li><i class="fas fa-check"></i> Belt testing (fees apply)</li>
+                    <li class="not-included"><i class="fas fa-times"></i> Specialty workshops</li>
+                    <li class="not-included"><i class="fas fa-times"></i> Family discount</li>
+                </ul>
+                <div class="pricing-action">
+                    <a href="contact.html" class="btn">Get Started</a>
+                </div>
+            </div>
+            
+            <div class="pricing-card featured">
+                <div class="featured-badge">MOST POPULAR</div>
+                <div class="pricing-header">
+                    <h3 class="pricing-title">Premium</h3>
+                    <p class="pricing-subtitle">Unlimited training</p>
+                    <div class="pricing-price">$119<span class="pricing-period">/month</span></div>
+                </div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> Unlimited classes</li>
+                    <li><i class="fas fa-check"></i> Access to all class levels</li>
+                    <li><i class="fas fa-check"></i> Uniform included</li>
+                    <li><i class="fas fa-check"></i> Free belt testing</li>
+                    <li><i class="fas fa-check"></i> 50% off specialty workshops</li>
+                    <li><i class="fas fa-check"></i> 10% family discount</li>
+                </ul>
+                <div class="pricing-action">
+                    <a href="contact.html" class="btn">Get Started</a>
+                </div>
+            </div>
+            
+            <div class="pricing-card">
+                <div class="pricing-header">
+                    <h3 class="pricing-title">Family</h3>
+                    <p class="pricing-subtitle">Train together</p>
+                    <div class="pricing-price">$199<span class="pricing-period">/month</span></div>
+                </div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> Unlimited classes for 3+ members</li>
+                    <li><i class="fas fa-check"></i> Access to all class levels</li>
+                    <li><i class="fas fa-check"></i> Uniforms included</li>
+                    <li><i class="fas fa-check"></i> Free belt testing</li>
+                    <li><i class="fas fa-check"></i> Free specialty workshops</li>
+                    <li><i class="fas fa-check"></i> Family training sessions</li>
+                </ul>
+                <div class="pricing-action">
+                    <a href="contact.html" class="btn">Get Started</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="additional-info">
+            <h3>Additional Information</h3>
+            <p>In addition to our regular membership plans, we offer several add-ons and accommodations to enhance your karate experience.</p>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <h4><i class="fas fa-hand-holding-usd"></i> One-Time Fees</h4>
+                    <p>These fees are charged only once when you join or reach specific milestones in your training.</p>
+                    <ul>
+                        <li>Registration Fee: $50 (waived for Premium and Family plans)</li>
+                        <li>Belt Testing: $40-$60 (varies by rank, included in Premium and Family plans)</li>
+                        <li>Black Belt Testing: $150 (special examination)</li>
+                        <li>Uniform Replacement: $45</li>
+                    </ul>
+                </div>
+                
+                <div class="info-card">
+                    <h4><i class="fas fa-calendar-alt"></i> Special Programs</h4>
+                    <p>We offer specialized training options that can be added to any membership plan.</p>
+                    <ul>
+                        <li>Private Lessons: $50 per hour</li>
+                        <li>Specialty Workshops: $30-$75 (discounted for Premium and Family plans)</li>
+                        <li>Summer Intensive Camp: $299 per week</li>
+                        <li>Competition Team: $50 additional per month</li>
+                    </ul>
+                </div>
+                
+                <div class="info-card">
+                    <h4><i class="fas fa-percentage"></i> Discounts Available</h4>
+                    <p>We offer special pricing for certain groups and situations.</p>
+                    <ul>
+                        <li>Family Discount: 10% off for additional family members</li>
+                        <li>Military/First Responder Discount: 15% off any plan</li>
+                        <li>Student Discount: 10% off with valid ID</li>
+                        <li>Prepay Discount: 10% off for annual payment</li>
+                    </ul>
+                </div>
+                
+                <div class="info-card">
+                    <h4><i class="fas fa-file-contract"></i> Membership Policies</h4>
+                    <p>Important information about our membership terms and conditions.</p>
+                    <ul>
+                        <li>No long-term contracts required</li>
+                        <li>Monthly memberships can be cancelled with 30-day notice</li>
+                        <li>Annual memberships are non-refundable</li>
+                        <li>Memberships can be frozen for up to 2 months per year</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="faq">
+            <h3>Frequently Asked Questions</h3>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Is there a registration or enrollment fee? <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, there is a one-time registration fee of $50 for new students, which covers administrative costs and your initial membership materials. This fee is waived for students who sign up for our Premium or Family membership plans.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    How often are belt promotions held? <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Belt testing is typically held every 3-4 months. Students must meet specific attendance requirements and demonstrate proficiency in their current rank's techniques to be eligible for testing. The testing schedule is posted in the dojo and announced in classes well in advance.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Can I switch membership plans? <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, you can upgrade or downgrade your membership plan at any time. Changes to your membership will take effect at the beginning of the next billing cycle. There are no penalties for changing your membership type.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    What is your makeup class policy? <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>If you miss a class, you can attend a makeup class within the same month, subject to availability. Basic members can make up missed classes by attending any class appropriate for their age and rank. Premium and Family plan members have unlimited classes and don't need to worry about makeups.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Do you offer a free trial class? <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes! We offer a free introductory class for prospective students to experience our teaching style and dojo atmosphere. You can schedule your free class by contacting us through our website, calling the dojo, or stopping by during business hours.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>Ready to Begin Your Karate Journey?</h2>
+        <p>Contact us to discuss which membership option is right for you or to schedule your free introductory class.</p>
+        <a href="contact.html" class="btn btn-large">Contact Us Today</a>
+        <div class="whatsapp-contact">
+            <i class="fab fa-whatsapp"></i>
+            <p>Or reach us directly on WhatsApp: <a href="https://wa.me/1234567890" target="_blank">Chat Now</a></p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="images/logo.png" alt="Karate Dojo Logo" class="footer-logo-img">
+                <h3>Karate Dojo</h3>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Martial Arts Ave, City</p>
+                <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+                <p><i class="fas fa-envelope"></i> info@karatedojo.com</p>
+            </div>
+            <div class="footer-hours">
+                <h4>Training Hours</h4>
+                <p>Monday - Friday: 4:00 PM - 9:00 PM</p>
+                <p>Saturday: 9:00 AM - 1:00 PM</p>
+                <p>Sunday: Closed</p>
+            </div>
+            <div class="footer-social">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Karate Dojo. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // FAQ Toggle Functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                faqItem.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html> 
